@@ -1,0 +1,26 @@
+{
+  "name": "angular-hybrid",
+  "version": "0.1.0",
+  "description": "angular-hybrid",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config ./config/webpack/webpack.development",
+    "build:production": "webpack --config ./config/webpack/webpack.production",
+    "start": "webpack-dev-server --config ./config/webpack/webpack.development",
+    "lint": "gulp lint"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AlexanderMac/angular-hybrid"
+  },
+  "author": "Alexander Mac",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AlexanderMac/angular-hybrid/issues"
+  },
+  "homepage": "https://github.com/AlexanderMac/angular-hybrid"
+}
