@@ -1,0 +1,65 @@
+import * as _ from 'lodash';
+
+class UserFormController {
+  private ngLocationSrvc: any;
+  private ntfsSrvc: any;
+  private userSrvc: any;
+
+  userId: number;
+  user: { roles: any[]; };
+  isLoading: boolean;
+  isSaving: boolean;
+
+  constructor($location, $routeParams, NotificationService, UserService) {
+    this.ngLocationSrvc = $location;
+    this.ntfsSrvc = NotificationService;
+    this.userSrvc = UserService;
+    this.userId = +$routeParams.id;
+  }
+
+  $onInit() {
+    if (!this.userId) {
+      this.user = {
+        roles: []
+      };
+      return;
+    }
+    this._loadUser();
+  }
+
+  _loadUser() {
+    this.isLoading = true;
+    return this.userSrvc
+      .getUser(this.userId)
+      .then(user => {
+        user.roles = _.map(user.roles, r => +r);
+        this.user = user;
+      })
+      .catch(err => {
+        this.ntfsSrvc.error(err, 'Unable to load user');
+        this.ngLocationSrvc.path('/users');
+      })
+      .finally(() => this.isLoading = false);
+  }
+
+  onChangeRoles(roles) {
+    this.user.roles = roles;
+  }
+
+  saveUser() {
+    this.isSaving = true;
+    let fn = this.userId ? 'updateUser' : 'createUser';
+    this.userSrvc[fn](this.user)
+      .then(() => {
+        this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`);
+        this.ngLocationSrvc.path('/users');
+      })
+      .catch(err => this.ntfsSrvc.error(err, 'Unable to save user'))
+      .finally(() => this.isSaving = false);
+  }
+}
+
+export const UserFormComponent = {
+  template: require('./form.component.pug'),
+  controller: UserFormController
+};

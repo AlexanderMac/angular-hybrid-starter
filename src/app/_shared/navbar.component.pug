@@ -1,0 +1,21 @@
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  a.navbar-brand(href="/") Angular hybrid
+  button.navbar-toggler(
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+  )
+    span.navbar-toggler-icon
+  .collapse.navbar-collapse(id="navbarSupportedContent")
+    ul.navbar-nav.mr-auto
+      li.nav-item(ng-class="{ active: $ctrl.isActive('/', true) }")
+        a.nav-link(href="/") Home
+          span.sr-only (current)
+      li.nav-item(ng-class="{ active: $ctrl.isActive('/users') }")
+        a.nav-link(href="#/users") Users
+      li.nav-item(ng-class="{ active: $ctrl.isActive('/roles') }")
+        a.nav-link(href="#/roles") Roles
+    span.navbar-text Hello Guest
