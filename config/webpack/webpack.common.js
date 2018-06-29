@@ -14,13 +14,17 @@ module.exports = {
   stats: { children: false },
 
   entry: {
-    app1: './src/app/app1.ts',
-    vendor1: './src/app/vendor1.ts'
+    polyfills2: './src/app/polyfills2.ts',
+    vendor2: './src/app/vendor2.ts',
+    app2: './src/app/main2.ts',
+    vendor1: './src/app/vendor1.ts',
+    app1: './src/app/app1.ts'
   },
 
   resolve: {
     extensions: ['.js', '.ts']
   },
+
   output: {
     path: helpers.root('dist'),
     publicPath: '/',
@@ -32,10 +36,15 @@ module.exports = {
   optimization: {
     splitChunks: {
       cacheGroups: {
-        commons: {
-          test: /[\\/]node_modules[\\/]/,
+        vendor1: {
+          chunks: 'initial',
           name: 'vendor1',
-          chunks: 'all'
+          test: 'vendor1'
+        },
+        vendor2: {
+          chunks: 'initial',
+          name: 'vendor2',
+          test: 'vendor2'
         }
       }
     }
@@ -50,6 +59,10 @@ module.exports = {
           'awesome-typescript-loader',
           'angular2-template-loader'
         ]
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
       },
       {
         test: /\.pug$/,
@@ -103,7 +116,9 @@ module.exports = {
     ),
 
     new HtmlPlugin({
-      template: 'src/public/index.pug'
+      template: 'src/public/index.pug',
+      chunksSortMode: 'manual',
+      chunks: ['vendor1', 'vendor2', 'polyfills2', 'app1', 'app2']
     }),
 
     new MiniCssExtractPlugin({
