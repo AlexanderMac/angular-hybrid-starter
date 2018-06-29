@@ -3,11 +3,11 @@ import { HomeComponent } from './component';
 
 export default ng
   .module('app.home', ['ngRoute'])
-  .config(($routeProvider) => {
+  .config(['$routeProvider', ($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider
       .when('/', {
         template: '<home></home>'
       });
-  })
+  }])
   .component('home', HomeComponent)
   .name;

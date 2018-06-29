@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 class NavBarController {
   private ngLocationSrvc: any;
 
+  static $inject = ['$location'];
   constructor($location) {
     this.ngLocationSrvc = $location;
   }

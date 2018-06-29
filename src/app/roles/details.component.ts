@@ -7,6 +7,7 @@ class RoleDetailsController {
   isLoading: boolean;
   role: any;
 
+  static $inject = ['$location', '$routeParams', 'NotificationService', 'RoleService'];
   constructor($location, $routeParams, NotificationService, RoleService) {
     this.ngLocationSrvc = $location;
     this.ntfsSrvc = NotificationService;

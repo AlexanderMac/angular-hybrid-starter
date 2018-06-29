@@ -10,6 +10,7 @@ class UserFormController {
   isLoading: boolean;
   isSaving: boolean;
 
+  static $inject = ['$location', '$routeParams', 'NotificationService', 'UserService'];
   constructor($location, $routeParams, NotificationService, UserService) {
     this.ngLocationSrvc = $location;
     this.ntfsSrvc = NotificationService;

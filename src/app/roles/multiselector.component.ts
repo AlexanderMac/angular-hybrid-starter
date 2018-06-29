@@ -9,6 +9,7 @@ class RoleMultiselectorController {
   isNoRoleSelected: boolean;
   initialRoles: any[];
 
+  static $inject = ['RoleService'];
   constructor(RoleService) {
     this.roleSrvc = RoleService;
     this.roles = [];

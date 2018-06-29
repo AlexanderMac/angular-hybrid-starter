@@ -11,6 +11,7 @@ class UserDetailsController {
   isLoading: boolean;
   user: any;
 
+  static $inject = ['$q', '$location', '$routeParams', 'NotificationService', 'RoleService', 'UserService'];
   constructor($q, $location, $routeParams, NotificationService, RoleService, UserService) {
     this.ngQSrvc = $q;
     this.ngLocationSrvc = $location;

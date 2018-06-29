@@ -9,7 +9,7 @@ import './styles.styl';
 
 export default ng
   .module('app.roles', ['ngRoute'])
-  .config(($routeProvider) => {
+  .config(['$routeProvider', ($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider
       .when('/roles', {
         template: '<role-list></role-list>'
@@ -23,7 +23,7 @@ export default ng
       .when('/roles/:id', {
         template: '<role-details></role-details>'
       });
-  })
+  }])
   .component('roleList', RoleListComponent)
   .component('roleForm', RoleFormComponent)
   .component('roleDetails', RoleDetailsComponent)

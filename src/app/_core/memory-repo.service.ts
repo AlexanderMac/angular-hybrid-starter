@@ -9,6 +9,7 @@ export class MemoryRepoService {
   protected models: IModel[];
   protected nextId: number;
 
+  static $inject = ['$q'];
   constructor($q) {
     this.ngQPromise = $q;
     this.models = [];

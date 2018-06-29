@@ -5,6 +5,7 @@ export class LocalStorageRepoService extends MemoryRepoService {
   private localStorage: any;
   private collectionName: any;
 
+  static $inject = ['$q', '$window'];
   constructor($q, $window) {
     super($q);
     this.localStorage = $window.localStorage;

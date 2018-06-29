@@ -1,6 +1,7 @@
 export class UserService {
   private repoSrvc: any;
 
+  static $inject = ['$q', '$window', 'LocalStorageRepoService'];
   constructor($q, $window, LocalStorageRepoService) {
     this.repoSrvc = new LocalStorageRepoService($q, $window);
     this.repoSrvc.init('Users');

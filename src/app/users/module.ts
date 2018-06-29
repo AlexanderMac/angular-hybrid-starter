@@ -8,7 +8,7 @@ import './styles.styl';
 
 export default ng
   .module('app.users', ['ngRoute'])
-  .config(($routeProvider) => {
+  .config(['$routeProvider', ($routeProvider: ng.route.IRouteProvider) => {
     $routeProvider
       .when('/users', {
         template: '<user-list></user-list>'
@@ -22,7 +22,7 @@ export default ng
       .when('/users/:id', {
         template: '<user-details></user-details>'
       });
-  })
+  }])
   .component('userList', UserListComponent)
   .component('userForm', UserFormComponent)
   .component('userDetails', UserDetailsComponent)

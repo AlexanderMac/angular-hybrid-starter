@@ -8,6 +8,7 @@ class RoleFormController {
   isLoading: boolean;
   isSaving: boolean;
 
+  static $inject = ['$location', '$routeParams', 'NotificationService', 'RoleService'];
   constructor($location, $routeParams, NotificationService, RoleService) {
     this.ngLocationSrvc = $location;
     this.ntfsSrvc = NotificationService;

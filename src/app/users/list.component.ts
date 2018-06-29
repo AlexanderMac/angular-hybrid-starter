@@ -12,6 +12,7 @@ class UserListController {
   users: any;
   isSaving: boolean;
 
+  static $inject = ['$q', '$location', '$routeParams', 'NotificationService', 'RoleService', 'UserService'];
   constructor($q, $location, $routeParams, NotificationService, RoleService, UserService) {
     this.ngQSrvc = $q;
     this.ngLocationSrvc = $location;
