@@ -1,13 +1,13 @@
 import * as ng from 'angular';
-import 'angular-route';
 
 import './_core/module';
 import './_shared/module';
 import './home/module';
 import './roles/module';
 import './users/module';
+import './test/module.ajs';
 
-import './app1.styl';
+import './app-ajs.styl';
 
 ng
   .module('app', [
@@ -16,7 +16,8 @@ ng
     'app.shared',
     'app.home',
     'app.roles',
-    'app.users'
+    'app.users',
+    'app.test'
   ])
   .config(['$routeProvider', '$locationProvider',
     ($routeProvider: ng.route.IRouteProvider, $locationProvider: angular.ILocationProvider) => {

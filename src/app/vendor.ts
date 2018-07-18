@@ -1,4 +1,11 @@
-import './polyfills2';
+import 'angular';
+import 'angular-route';
+import 'lodash';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'spinkit/css/spinkit.css';
+import 'toastr';
+import 'toastr/build/toastr.css';
+
 import '@angular/platform-browser';
 import '@angular/platform-browser-dynamic';
 import '@angular/core';
