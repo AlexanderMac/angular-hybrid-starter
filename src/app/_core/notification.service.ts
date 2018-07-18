@@ -26,3 +26,13 @@ export class NotificationService {
     Toastr.error(err.reason ? err.reason : 'Unknown error');
   }
 }
+
+export function NotificationServiceFactory(i: any) {
+  return i.get('NotificationService');
+}
+
+export const notificationServiceProvider = {
+  provide: NotificationService,
+  useFactory: NotificationServiceFactory,
+  deps: ['$injector']
+};
