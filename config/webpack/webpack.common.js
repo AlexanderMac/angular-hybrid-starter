@@ -2,7 +2,6 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const webpack              = require('webpack');
 const CleanPlugin          = require('clean-webpack-plugin');
 const HtmlPlugin           = require('html-webpack-plugin');
 const ProgressBarPlugin    = require('progress-bar-webpack-plugin');
@@ -11,40 +10,70 @@ const NotifierPlugin       = require('webpack-notifier');
 const helpers              = require('./helpers');
 
 module.exports = {
-  stats: { children: false },
+  stats: {
+    assets: false,
+    builtAt: false,
+    children: false,
+    chunks: true,
+    chunkGroups: false,
+    chunkModules: false,
+    chunkOrigins: false,
+    cachedAssets: false,
+    depth: false,
+    entrypoints: false,
+    timings: false,
+    hash: false,
+    modules: false,
+    version: false
+  },
 
-  entry: {
-    polyfills2: './src/app/polyfills2.ts',
-    vendor2: './src/app/vendor2.ts',
-    app2: './src/app/main2.ts',
-    vendor1: './src/app/vendor1.ts',
-    app1: './src/app/app1.ts'
+  performance: {
+    hints: false
   },
 
   resolve: {
-    extensions: ['.js', '.ts']
+    extensions: ['.js', '.ts'],
+    symlinks: true,
+    modules: [
+      helpers.root('src', 'app'),
+      'node_modules'
+    ],
+    mainFields: ['browser', 'module', 'main']
+  },
+
+  entry: {
+    polyfills: './src/app/polyfills.ts',
+    main: './src/app/main.ts'
   },
 
   output: {
     path: helpers.root('dist'),
     publicPath: '/',
-    filename: '[name].js',
-    chunkFilename: '[name].js',
-    sourceMapFilename: '[name].map'
+    filename: '[name]-[hash].js',
+    chunkFilename: '[name]-[hash].js'
   },
 
   optimization: {
     splitChunks: {
+      chunks: 'async',
+      minSize: 30000,
+      maxSize: 0,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
-        vendor1: {
-          chunks: 'initial',
-          name: 'vendor1',
-          test: 'vendor1'
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'all',
+          name: 'vendors',
+          priority: -10
         },
-        vendor2: {
-          chunks: 'initial',
-          name: 'vendor2',
-          test: 'vendor2'
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     }
@@ -53,32 +82,35 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
+        parser: {
+          system: true
+        }
+      },
+      {
         test: /\.ts$/,
         exclude: /(node_modules)/,
-        loader: [
+        use: [
           'awesome-typescript-loader',
           'angular2-template-loader'
         ]
       },
       {
         test: /\.json$/,
-        loader: 'json-loader'
+        use: 'json-loader'
       },
       {
         test: /\.pug$/,
         exclude: /(node_modules)/,
-        loaders: [
+        use: [
           'raw-loader',
           'pug-html-loader'
         ]
       },
       {
         test: /\.css$/,
-        loader: 'raw-loader'
-      },
-      {
-        test: /\.css$/,
         use: [
+          'raw-loader',
           MiniCssExtractPlugin.loader,
           'css-loader?minify'
         ]
@@ -94,11 +126,11 @@ module.exports = {
       },
       {
         test: /\.(png|jpe?g|gif)$/,
-        loader: 'file-loader?name=images/[name].[ext]'
+        use: 'file-loader?name=images/[name].[ext]'
       },
       {
         test: /\.(svg|woff|woff2|ttf|eot|ico)$/,
-        loader: 'file-loader?name=fonts/[name].[ext]'
+        use: 'file-loader?name=fonts/[name].[ext]'
       }
     ]
   },
@@ -110,20 +142,20 @@ module.exports = {
       dry: false
     }),
 
+    /* TODO: remove?
     new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)/,
       helpers.root('src', 'app')
     ),
+    */
 
     new HtmlPlugin({
-      template: 'src/public/index.pug',
-      chunksSortMode: 'manual',
-      chunks: ['vendor1', 'vendor2', 'polyfills2', 'app1', 'app2']
+      template: 'src/public/index.pug'
     }),
 
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
-      chunkFilename: 'css/[name].css'
+      filename: 'css/[name]-[hash].css',
+      chunkFilename: 'css/[name]-[hash].css'
     }),
 
     new ProgressBarPlugin({
