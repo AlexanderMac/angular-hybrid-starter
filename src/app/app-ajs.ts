@@ -1,11 +1,11 @@
 import * as ng from 'angular';
 
-import './_core/module';
-import './_shared/module';
-import './home/module';
-import './roles/module';
-import './users/module';
-import './test/module.ajs';
+import './_core/module-ajs';
+import './_shared/module-ajs';
+import './home/module-ajs';
+import './roles/module-ajs';
+import './users/module-ajs';
+import './test/module-ajs';
 
 import './app-ajs.styl';
 
