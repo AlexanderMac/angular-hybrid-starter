@@ -1,6 +1,6 @@
 import * as ng                from 'angular';
 import { downgradeComponent } from '@angular/upgrade/static';
-import { TestComponent }      from './test.component';
+import { TestComponent }      from '../../test/test.component';
 
 export default ng
   .module('app.test', ['ngRoute'])

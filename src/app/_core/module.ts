@@ -1,5 +1,5 @@
 import { NgModule }                    from '@angular/core';
-import { notificationServiceProvider } from './notification.service';
+import { notificationServiceProvider } from '../ajs/_core/notification.service';
 
 @NgModule({
   providers: [
