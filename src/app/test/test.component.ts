@@ -3,18 +3,18 @@ import { NotificationService } from '../ajs/_core/notification.service';
 
 @Component({
   selector: 'test',
-  template: `<h2>Angular-next Component</h2>
-    <a href="#">Home</a>
-    <br/>
-    <a href="#/users">Users</a>
-    <br/>
-    <a href="#/roles">Roles</a>
-  `
+  templateUrl: './test.component.pug'
 })
 export class TestComponent implements OnInit {
+  isLoading: boolean;
+
   constructor(private ntfsSrvc: NotificationService) { }
 
   ngOnInit(): void {
-    this.ntfsSrvc.info('TestComponent - onInit');
+    this.isLoading = true;
+    setTimeout(() => {
+      this.ntfsSrvc.info('TestComponent - onInit');
+      this.isLoading = false;
+    }, 1000);
   }
 }

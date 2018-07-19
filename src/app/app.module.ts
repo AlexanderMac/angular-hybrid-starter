@@ -3,7 +3,6 @@ import { UpgradeModule } from '@angular/upgrade/static';
 import { NgModule }      from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { CoreModule }   from './_core/module';
 import { TestModule }   from './test/module';
 
 @NgModule({
@@ -13,7 +12,6 @@ import { TestModule }   from './test/module';
   imports: [
     BrowserModule,
     UpgradeModule,
-    CoreModule,
     TestModule
   ],
   providers: [],
