@@ -1,5 +1,5 @@
 # angular-hybrid-starter
-`Angular hybrid` starter.
+`Angular hybrid` application template.
 - Check [angularjs-starter](https://github.com/AlexanderMac/angularjs-starter) if you need a starter for AngularJs.
 - Check [angular-starter](https://github.com/AlexanderMac/angular-starter) if you need a starter for Angular (v2+).
 
