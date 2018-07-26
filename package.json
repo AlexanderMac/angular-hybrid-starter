@@ -1,7 +1,7 @@
 {
-  "name": "angular-hybrid",
+  "name": "angular-hybrid-starter",
   "version": "0.1.0",
-  "description": "angular-hybrid",
+  "description": "angular-hybrid-starter",
   "private": true,
   "scripts": {
     "build": "webpack --config ./config/webpack/webpack.development",
@@ -64,12 +64,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/AlexanderMac/angular-hybrid"
+    "url": "https://github.com/AlexanderMac/angular-hybrid-starter"
   },
   "author": "Alexander Mac",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/AlexanderMac/angular-hybrid/issues"
+    "url": "https://github.com/AlexanderMac/angular-hybrid-starter/issues"
   },
-  "homepage": "https://github.com/AlexanderMac/angular-hybrid"
+  "homepage": "https://github.com/AlexanderMac/angular-hybrid-starter"
 }

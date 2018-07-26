@@ -1,9 +1,9 @@
-# angular-hybrid
-`Angular hybrid` application example.
-- Check [angular-starter](https://github.com/AlexanderMac/angular-starter) if you need an example for AngularJs.
-- Check [angular-next-starter](https://github.com/AlexanderMac/angular-next-starter) if you need an example for AngularNext.
+# angular-hybrid-starter
+`Angular hybrid` starter.
+- Check [angularjs-starter](https://github.com/AlexanderMac/angularjs-starter) if you need a starter for AngularJs.
+- Check [angular-starter](https://github.com/AlexanderMac/angular-starter) if you need a starter for Angular (v2+).
 
-[![Build Status](https://travis-ci.org/AlexanderMac/angular-hybrid.svg?branch=master)](https://travis-ci.org/AlexanderMac/angular-hybrid)
+[![Build Status](https://travis-ci.org/AlexanderMac/angular-hybrid-starter.svg?branch=master)](https://travis-ci.org/AlexanderMac/angular-hybrid-starter)
 
 ### Features
 - AngularJs/AngularNext in one app
@@ -23,10 +23,10 @@
 ### How to use
 ```sh
 # Clone this repo:
-git clone https://github.com/AlexanderMac/angular-hybrid
+git clone https://github.com/AlexanderMac/angular-hybrid-starter
 
 # Init your repo:
-cd angular-hybrid && rm -rf .git && git init
+cd angular-hybrid-starter && rm -rf .git && git init
 
 # Install dependencies:
 npm i
