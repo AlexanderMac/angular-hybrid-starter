@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'my-app',
+  selector: 'am-app-cmp',
   template: `
     <div ng-view></div>
   `,
