@@ -1,9 +1,8 @@
 export class RoleService {
   private repoSrvc: any;
 
-  static $inject = ['$q', '$window', 'LocalStorageRepoService'];
-  constructor($q, $window, LocalStorageRepoService) {
-    this.repoSrvc = new LocalStorageRepoService($q, $window);
+  constructor(LocalStorageRepoService) {
+    this.repoSrvc = LocalStorageRepoService;
     this.repoSrvc.init('Roles');
   }
 
