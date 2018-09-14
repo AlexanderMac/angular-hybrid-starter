@@ -1,7 +1,7 @@
-import * as _                from 'lodash';
-import { MemoryRepoService } from './memory-repo.service';
+import * as _          from 'lodash';
+import { BaseService } from './base.service';
 
-export class LocalStorageRepoService extends MemoryRepoService {
+export class LocalStorageRepoService extends BaseService {
   private localStorage: any;
   private collectionName: any;
 
@@ -17,11 +17,11 @@ export class LocalStorageRepoService extends MemoryRepoService {
   }
 
   load() {
-    let modelsStr = this.localStorage.getItem(this.collectionName);
-    if (modelsStr) {
-      let models = _.attempt(JSON.parse.bind(null, modelsStr)) as any[];
-      this.models = _.isError(models) ? [] : models;
-      let nextIdStr = _.chain(this.models)
+    let objectsStr = this.localStorage.getItem(this.collectionName);
+    if (objectsStr) {
+      let objects = _.attempt(JSON.parse.bind(null, objectsStr)) as any[];
+      this.objects = _.isError(objects) ? [] : objects;
+      let nextIdStr = _.chain(this.objects)
         .map('id')
         .max()
         .value();
@@ -30,25 +30,25 @@ export class LocalStorageRepoService extends MemoryRepoService {
   }
 
   save() {
-    let models = _.chain(this.models)
-      .map(model => _.omit(model, '$$hashKey'))
+    let objects = _.chain(this.objects)
+      .map(obj => _.omit(obj, '$$hashKey'))
       .value();
-    let modelsStr = JSON.stringify(models);
-    this.localStorage.setItem(this.collectionName, modelsStr);
+    let objectsStr = JSON.stringify(objects);
+    this.localStorage.setItem(this.collectionName, objectsStr);
   }
 
-  create(model) {
+  create(obj) {
     return super
-      .create(model)
+      .create(obj)
       .then(res => {
         this.save();
         return res;
       });
   }
 
-  update(modelData) {
+  update(objData) {
     return super
-      .update(modelData)
+      .update(objData)
       .then(res => {
         this.save();
         return res;
@@ -63,8 +63,4 @@ export class LocalStorageRepoService extends MemoryRepoService {
         return res;
       });
   }
-}
-
-export function LocalStorageRepoServiceFactory() {
-  return LocalStorageRepoService;
 }
