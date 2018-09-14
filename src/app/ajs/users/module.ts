@@ -1,14 +1,13 @@
 import * as ng                  from 'angular';
-import { UserListComponent }    from './list.component';
-import { UserFormComponent }    from './form.component';
-import { UserDetailsComponent } from './details.component';
-import { UserService }          from './service';
+import { downgradeComponent }   from '@angular/upgrade/static';
 
-import './styles.styl';
+import { UserListComponent }    from '../../users/list.component';
+import { UserFormComponent }    from '../../users/form.component';
+import { UserDetailsComponent } from '../../users/details.component';
 
 export default ng
   .module('app.users', ['ngRoute'])
-  .config(['$routeProvider', ($routeProvider: ng.route.IRouteProvider) => {
+  .config(($routeProvider) => {
     $routeProvider
       .when('/users', {
         template: '<user-list></user-list>'
@@ -22,9 +21,8 @@ export default ng
       .when('/users/:id', {
         template: '<user-details></user-details>'
       });
-  }])
-  .component('userList', UserListComponent)
-  .component('userForm', UserFormComponent)
-  .component('userDetails', UserDetailsComponent)
-  .service('UserService', UserService)
+  })
+  .directive('userList', downgradeComponent({ component: UserListComponent }) as angular.IDirectiveFactory)
+  .directive('userForm', downgradeComponent({ component: UserFormComponent }) as angular.IDirectiveFactory)
+  .directive('userDetails', downgradeComponent({ component: UserDetailsComponent }) as angular.IDirectiveFactory)
   .name;
