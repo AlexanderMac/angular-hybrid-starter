@@ -5,7 +5,6 @@ import './_shared/module';
 import './home/module';
 import './roles/module';
 import './users/module';
-import './test/module';
 
 import './app.styl';
 
@@ -16,8 +15,7 @@ ng
     'app.shared',
     'app.home',
     'app.roles',
-    'app.users',
-    'app.test'
+    'app.users'
   ])
   .config(['$routeProvider', '$locationProvider',
     ($routeProvider: ng.route.IRouteProvider, $locationProvider: angular.ILocationProvider) => {
