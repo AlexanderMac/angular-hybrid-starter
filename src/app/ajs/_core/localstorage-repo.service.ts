@@ -64,3 +64,12 @@ export class LocalStorageRepoService extends BaseService {
       });
   }
 }
+
+export class LocalStorageRepoServiceFactory {
+  static $inject = ['$q', '$window'];
+  constructor(private $q, private $window) {}
+
+  getInstance() {
+    return new LocalStorageRepoService(this.$q, this.$window);
+  }
+}

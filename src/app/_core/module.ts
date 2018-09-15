@@ -1,10 +1,10 @@
-import { NgModule }                        from '@angular/core';
-import { localStorageRepoServiceProvider } from './localstorage-repo.service';
-import { notificationServiceProvider }     from './notification.service';
+import { NgModule }                               from '@angular/core';
+import { localStorageRepoServiceFactoryProvider } from './localstorage-repo.service';
+import { notificationServiceProvider }            from './notification.service';
 
 @NgModule({
   providers: [
-    localStorageRepoServiceProvider,
+    localStorageRepoServiceFactoryProvider,
     notificationServiceProvider
   ]
 })

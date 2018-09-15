@@ -1,13 +1,14 @@
-import { Injectable }              from '@angular/core';
-import { LocalStorageRepoService } from '../ajs/_core/localstorage-repo.service';
-import { User }                    from './model';
+import { Injectable }                     from '@angular/core';
+import { LocalStorageRepoService,
+         LocalStorageRepoServiceFactory } from '../ajs/_core/localstorage-repo.service';
+import { User }                           from './model';
 
 @Injectable()
 export class UserService {
   private repoSrvc: LocalStorageRepoService;
 
-  constructor(repo: LocalStorageRepoService) {
-    this.repoSrvc = repo;
+  constructor(lsRepoServiceFactory: LocalStorageRepoServiceFactory) {
+    this.repoSrvc = lsRepoServiceFactory.getInstance();
     this.repoSrvc.init('Users');
   }
 

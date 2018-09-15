@@ -1,8 +1,9 @@
 export class RoleService {
   private repoSrvc: any;
 
-  constructor(LocalStorageRepoService) {
-    this.repoSrvc = LocalStorageRepoService;
+  static $inject = ['LocalStorageRepoServiceFactory'];
+  constructor(lsRepoServiceFactory) {
+    this.repoSrvc = lsRepoServiceFactory.getInstance();
     this.repoSrvc.init('Roles');
   }
 
