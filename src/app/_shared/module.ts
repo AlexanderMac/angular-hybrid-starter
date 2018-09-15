@@ -7,15 +7,15 @@ import { NavbarComponentDirective }  from './navbar.component';
 import { SpinnerComponentDirective } from './spinner.component';
 
 @NgModule({
-  declarations: [
-    NavbarComponentDirective,
-    SpinnerComponentDirective
-  ],
   imports: [
     CommonModule,
     // TODO: RouterModule,
     FormsModule,
     UpgradeModule
+  ],
+  declarations: [
+    NavbarComponentDirective,
+    SpinnerComponentDirective
   ],
   exports: [
     CommonModule,
