@@ -1,5 +1,5 @@
 import { NgModule }             from '@angular/core';
-import { RouterModule }         from '@angular/router';
+// TODO: import { RouterModule }         from '@angular/router';
 import { CoreModule }           from '../_core/module';
 import { SharedModule }         from '../_shared/module';
 import { RolesModule }          from '../roles/module';

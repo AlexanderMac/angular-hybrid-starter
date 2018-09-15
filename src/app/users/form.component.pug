@@ -42,7 +42,7 @@ am-spinner(*ngIf="isLoading")
 
     .form-group.form-check.row
       .offset-md-3.col-md-9
-        // TODO: am-role-multiselector('[initialRoles]'="user.roles" '(changeRoles)'="rolesChange($event)")
+        am-role-multiselector('[initialRoles]'="user.roles" '(onChange)'="rolesChange($event)")
 
     .buttons.text-right
       a.btn.btn-light(href="#/users") Cancel

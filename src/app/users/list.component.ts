@@ -1,10 +1,13 @@
-import * as _                  from 'lodash';
-import { Component, OnInit }   from '@angular/core';
+import * as _                   from 'lodash';
+import { Component, OnInit }    from '@angular/core';
 // TODO: import { Router }              from '@angular/router';
-import { NotificationService } from '../ajs/_core/notification.service';
-import { UserService }         from './service';
-// import { RoleService }         from '../roles/service';
-import { User }                from './model';
+import { Location,
+         LocationStrategy,
+         PathLocationStrategy } from '@angular/common';
+import { NotificationService }  from '../_core/notification.service';
+import { UserService }          from './service';
+import { RoleService }          from '../roles/service';
+import { User }                 from './model';
 
 class UserEx extends User {
   rolesStr: string;
@@ -12,7 +15,10 @@ class UserEx extends User {
 
 @Component({
   selector: 'am-user-list',
-  template: require('./list.component.pug')
+  template: require('./list.component.pug'),
+  providers: [
+    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
+  ]
 })
 export class UserListComponent implements OnInit {
   isLoading: boolean;
@@ -21,9 +27,10 @@ export class UserListComponent implements OnInit {
 
   constructor(
     // TODO: private router: Router,
+    private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService,
-    // private roleSrvc: RoleService
+    private roleSrvc: RoleService
   ) {
   }
 
@@ -35,34 +42,34 @@ export class UserListComponent implements OnInit {
     this.isLoading = true;
     Promise
       .all([
-        [], // TODO: => this.roleSrvc.getRoles(),
+        this.roleSrvc.getRoles(),
         this.userSrvc.getUsers()
       ])
       .then(([roles, users]) => {
         this.users = _.map(users, user => {
           let userEx = user as UserEx;
-          /*userEx.rolesStr = _.chain(user.roles)
+          userEx.rolesStr = _.chain(user.roles)
             .map(userRoleId => _.find(roles, { id: +userRoleId }))
             .map(role => role ? role.name : '')
             .compact()
             .join(',')
-            .value();*/
+            .value();
           // TODO:
           this.isLoading = false;
           return userEx;
         });
       })
-      .catch(() => this.ntfsSrvc.error('Unable to load users'))
+      .catch(() => this.ntfsSrvc.error('Unable to load users'));
       // TODO: .finally(() => this.isLoading = false);
   }
 
   userDetails(user: User): void {
-    location.href = `#/users/${user.id}`;
+    this.locationSrvc.go(`#/users/${user.id}`);
     // TODO: this.router.navigate(['/users', user.id]);
   }
 
   editUser(user: User): void {
-    location.href = `#/users/${user.id}/edit`;
+    this.locationSrvc.go(`#/users/${user.id}/edit`);
     // TODO: this.router.navigate(['/users/:id/edit', { id: user.id }]);
   }
 
@@ -75,12 +82,11 @@ export class UserListComponent implements OnInit {
     this.isSaving = true;
     this.userSrvc
       .deleteUser(user.id)
-      .subscribe(
-        () => {
-          _.remove(this.users, user);
-          this.ntfsSrvc.info('User deleted successfully');
-        },
-        () => this.ntfsSrvc.error('Unable to delete user'),
-        () => this.isSaving = false);
+      .then(() => {
+        _.remove(this.users, user);
+        this.ntfsSrvc.info('User deleted successfully');
+      })
+      .catch(() => this.ntfsSrvc.error('Unable to delete user'))
+      .finally(() => this.isSaving = false);
   }
 }

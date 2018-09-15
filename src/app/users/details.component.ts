@@ -1,11 +1,14 @@
-import * as _                     from 'lodash';
-import { Component, OnInit }      from '@angular/core';
+import * as _                   from 'lodash';
+import { Component, OnInit }    from '@angular/core';
 // TODO: import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin }               from 'rxjs/observable/forkJoin';
-import { NotificationService }    from '../ajs/_core/notification.service';
-import { UserService }            from './service';
-// import { RoleService }            from '../roles/service';
-import { User }                   from './model';
+import { Location,
+         LocationStrategy,
+         PathLocationStrategy } from '@angular/common';
+import { RouteParams }          from '../_core/route-params.service';
+import { NotificationService }  from '../_core/notification.service';
+import { UserService }          from './service';
+import { RoleService }          from '../roles/service';
+import { User }                 from './model';
 
 class UserEx extends User {
   rolesStr: string;
@@ -13,7 +16,10 @@ class UserEx extends User {
 
 @Component({
   selector: 'am-user-details',
-  templateUrl: './details.component.pug'
+  templateUrl: './details.component.pug',
+  providers: [
+    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
+  ]
 })
 export class UserDetailsComponent implements OnInit {
   isLoading: boolean;
@@ -24,9 +30,12 @@ export class UserDetailsComponent implements OnInit {
   constructor(
     // TODO: private router: Router,
     // TODO: private activatedRoute: ActivatedRoute,
+    routeParams: RouteParams,
+    private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService,
-    /*private roleSrvc: RoleService*/) {
+    private roleSrvc: RoleService) {
+      this.userId = +routeParams.id;
     // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
@@ -49,11 +58,13 @@ export class UserDetailsComponent implements OnInit {
           .compact()
           .join(',')
           .value();
+        // TODO:
+        this.isLoading = false;
       })
       .catch(err => {
         this.ntfsSrvc.error('Unable to load user');
-        this.router.navigate(['/users']);
-      })
+        this.locationSrvc.go('#/users');
+      });
       // TODO: .finally() => this.isLoading = false);
   }
 }

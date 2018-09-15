@@ -1,13 +1,20 @@
-import * as _                     from 'lodash';
-import { Component, OnInit }      from '@angular/core';
+import * as _                   from 'lodash';
+import { Component, OnInit }    from '@angular/core';
 // TODO: import { ActivatedRoute, Router } from '@angular/router';
-import { NotificationService }    from '../ajs/_core/notification.service';
-import { UserService }            from './service';
-import { User }                   from './model';
+import { Location,
+         LocationStrategy,
+         PathLocationStrategy } from '@angular/common';
+import { RouteParams }          from '../_core/route-params.service';
+import { NotificationService }  from '../_core/notification.service';
+import { UserService }          from './service';
+import { User }                 from './model';
 
 @Component({
   selector: 'am-user-form',
-  templateUrl: './form.component.pug'
+  templateUrl: './form.component.pug',
+  providers: [
+    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
+  ]
 })
 export class UserFormComponent implements OnInit {
   isLoading: boolean;
@@ -18,15 +25,18 @@ export class UserFormComponent implements OnInit {
   constructor(
     /*TODO: private router: Router,
     private activatedRoute: ActivatedRoute,*/
+    routeParams: RouteParams,
+    private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService) {
+      this.userId = +routeParams.id;
     // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
     if (!this.userId) {
       this.user = new User();
-      this.user.roles = [1]; // TODO
+      this.user.roles = [];
     } else {
       this._loadUser();
     }
@@ -40,15 +50,15 @@ export class UserFormComponent implements OnInit {
           user.roles = _.map(user.roles, r => +r);
           this.user = user;
         })
-        .catch(err => {
+        .catch(() => {
           this.ntfsSrvc.error('Unable to load user');
-          this.router.navigate(['/users']);
+          this.locationSrvc.go('#/users');
         })
-        // TODO: .finally(() => this.isLoading = false)
+        .finally(() => this.isLoading = false);
   }
 
-  rolesChange(roles: number[]) {
-    this.user.roles = roles;
+  rolesChange(data) {
+    this.user.roles = data.roles;
   }
 
   saveUser(): void {
@@ -58,7 +68,7 @@ export class UserFormComponent implements OnInit {
       .userSrvc[fn](this.user)
       .then(() => {
         this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`);
-        // TODO: this.router.navigate(['/users']);
+        this.locationSrvc.go('#/users');
       })
       .catch(() => this.ntfsSrvc.error('Unable to save user'))
       .finally(() => this.isSaving = false);
