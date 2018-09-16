@@ -1,9 +1,6 @@
 import * as _                   from 'lodash';
 import { Component, OnInit }    from '@angular/core';
-// TODO: import { Router }              from '@angular/router';
-import { Location,
-         LocationStrategy,
-         PathLocationStrategy } from '@angular/common';
+import { Router }               from '@angular/router';
 import { NotificationService }  from '../_core/notification.service';
 import { UserService }          from './service';
 import { RoleService }          from '../roles/service';
@@ -15,10 +12,7 @@ class UserEx extends User {
 
 @Component({
   selector: 'am-user-list',
-  template: require('./list.component.pug'),
-  providers: [
-    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
-  ]
+  template: require('./list.component.pug')
 })
 export class UserListComponent implements OnInit {
   isLoading: boolean;
@@ -26,8 +20,7 @@ export class UserListComponent implements OnInit {
   users: UserEx[] = [];
 
   constructor(
-    // TODO: private router: Router,
-    private locationSrvc: Location,
+    private router: Router,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService,
     private roleSrvc: RoleService
@@ -64,13 +57,11 @@ export class UserListComponent implements OnInit {
   }
 
   userDetails(user: User): void {
-    this.locationSrvc.go(`#/users/${user.id}`);
-    // TODO: this.router.navigate(['/users', user.id]);
+    this.router.navigate(['/users', user.id]);
   }
 
   editUser(user: User): void {
-    this.locationSrvc.go(`#/users/${user.id}/edit`);
-    // TODO: this.router.navigate(['/users/:id/edit', { id: user.id }]);
+    this.router.navigate(['/users/:id/edit', { id: user.id }]);
   }
 
   deleteUser(user: User): void {

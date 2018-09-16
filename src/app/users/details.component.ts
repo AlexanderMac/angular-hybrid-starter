@@ -1,10 +1,6 @@
 import * as _                   from 'lodash';
 import { Component, OnInit }    from '@angular/core';
-// TODO: import { ActivatedRoute, Router } from '@angular/router';
-import { Location,
-         LocationStrategy,
-         PathLocationStrategy } from '@angular/common';
-import { RouteParams }          from '../_core/route-params.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService }  from '../_core/notification.service';
 import { UserService }          from './service';
 import { RoleService }          from '../roles/service';
@@ -16,10 +12,7 @@ class UserEx extends User {
 
 @Component({
   selector: 'am-user-details',
-  templateUrl: './details.component.pug',
-  providers: [
-    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
-  ]
+  templateUrl: './details.component.pug'
 })
 export class UserDetailsComponent implements OnInit {
   isLoading: boolean;
@@ -28,15 +21,12 @@ export class UserDetailsComponent implements OnInit {
   user: UserEx;
 
   constructor(
-    // TODO: private router: Router,
-    // TODO: private activatedRoute: ActivatedRoute,
-    routeParams: RouteParams,
-    private locationSrvc: Location,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService,
     private roleSrvc: RoleService) {
-      this.userId = +routeParams.id;
-    // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
+      this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
@@ -63,7 +53,7 @@ export class UserDetailsComponent implements OnInit {
       })
       .catch(err => {
         this.ntfsSrvc.error('Unable to load user');
-        this.locationSrvc.go('#/users');
+        this.router.navigate(['/users']);
       });
       // TODO: .finally() => this.isLoading = false);
   }

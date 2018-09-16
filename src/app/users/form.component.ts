@@ -1,20 +1,13 @@
 import * as _                   from 'lodash';
 import { Component, OnInit }    from '@angular/core';
-// TODO: import { ActivatedRoute, Router } from '@angular/router';
-import { Location,
-         LocationStrategy,
-         PathLocationStrategy } from '@angular/common';
-import { RouteParams }          from '../_core/route-params.service';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationService }  from '../_core/notification.service';
 import { UserService }          from './service';
 import { User }                 from './model';
 
 @Component({
   selector: 'am-user-form',
-  templateUrl: './form.component.pug',
-  providers: [
-    Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
-  ]
+  templateUrl: './form.component.pug'
 })
 export class UserFormComponent implements OnInit {
   isLoading: boolean;
@@ -23,14 +16,11 @@ export class UserFormComponent implements OnInit {
   user: User;
 
   constructor(
-    /*TODO: private router: Router,
-    private activatedRoute: ActivatedRoute,*/
-    routeParams: RouteParams,
-    private locationSrvc: Location,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService) {
-      this.userId = +routeParams.id;
-    // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
+      this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
@@ -52,7 +42,7 @@ export class UserFormComponent implements OnInit {
         })
         .catch(() => {
           this.ntfsSrvc.error('Unable to load user');
-          this.locationSrvc.go('#/users');
+          this.router.navigate(['/users']);
         })
         .finally(() => this.isLoading = false);
   }
@@ -68,7 +58,7 @@ export class UserFormComponent implements OnInit {
       .userSrvc[fn](this.user)
       .then(() => {
         this.ntfsSrvc.info(`User ${this.userId ? 'updated' : 'created'} successfully`);
-        this.locationSrvc.go('#/users');
+        this.router.navigate(['/users']);
       })
       .catch(() => this.ntfsSrvc.error('Unable to save user'))
       .finally(() => this.isSaving = false);

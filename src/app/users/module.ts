@@ -1,5 +1,5 @@
 import { NgModule }             from '@angular/core';
-// TODO: import { RouterModule }         from '@angular/router';
+import { RouterModule }         from '@angular/router';
 import { CoreModule }           from '../_core/module';
 import { SharedModule }         from '../_shared/module';
 import { RolesModule }          from '../roles/module';
@@ -19,13 +19,12 @@ import './styles.styl';
   imports: [
     CoreModule,
     SharedModule,
-    /* TODO:
     RouterModule.forChild([
       { path: 'users', component: UserListComponent },
       { path: 'users/new', component: UserFormComponent },
       { path: 'users/:id/edit', component: UserFormComponent },
       { path: 'users/:id', component: UserDetailsComponent }
-    ]),*/
+    ]),
     RolesModule
   ],
   providers: [

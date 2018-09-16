@@ -15,6 +15,6 @@ platformBrowserDynamic()
   .bootstrapModule(AppModule)
   .then(platformRef => {
     const upgrade = platformRef.injector.get(UpgradeModule) as UpgradeModule;
-    upgrade.bootstrap(document.body, ['app']);
+    upgrade.bootstrap(document.documentElement, ['app']);
   })
   .catch(err => console.log(err));
