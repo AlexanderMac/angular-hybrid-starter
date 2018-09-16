@@ -1,6 +1,5 @@
 import * as ng                  from 'angular';
 import { downgradeComponent }   from '@angular/upgrade/static';
-
 import { UserListComponent }    from '../../users/list.component';
 import { UserFormComponent }    from '../../users/form.component';
 import { UserDetailsComponent } from '../../users/details.component';

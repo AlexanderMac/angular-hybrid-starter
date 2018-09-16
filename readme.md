@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.org/AlexanderMac/angular-hybrid-starter.svg?branch=master)](https://travis-ci.org/AlexanderMac/angular-hybrid-starter)
 
 ### Features
-- AngularJs/AngularNext in one app
+- AngularJs/Angular in one app
 - TypeScript
 - Users/Roles CRUD
 - Clean code:)
@@ -31,8 +31,8 @@ cd angular-hybrid-starter && rm -rf .git && git init
 # Install dependencies:
 npm i
 
-# Run tests (linter):
-npm test
+# Run linter:
+npm run lint
 
 # Build app:
 npm run build            # for dev
