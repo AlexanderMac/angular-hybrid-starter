@@ -1,6 +1,5 @@
 import * as _                   from 'lodash';
 import { Component, OnInit }    from '@angular/core';
-// TODO: import { ActivatedRoute, Router } from '@angular/router';
 import { Location,
          LocationStrategy,
          PathLocationStrategy } from '@angular/common';
@@ -28,15 +27,12 @@ export class UserDetailsComponent implements OnInit {
   user: UserEx;
 
   constructor(
-    // TODO: private router: Router,
-    // TODO: private activatedRoute: ActivatedRoute,
     routeParams: RouteParams,
     private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService,
     private roleSrvc: RoleService) {
       this.userId = +routeParams.id;
-    // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {

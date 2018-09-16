@@ -1,6 +1,5 @@
 import * as _                   from 'lodash';
 import { Component, OnInit }    from '@angular/core';
-// TODO: import { ActivatedRoute, Router } from '@angular/router';
 import { Location,
          LocationStrategy,
          PathLocationStrategy } from '@angular/common';
@@ -23,14 +22,11 @@ export class UserFormComponent implements OnInit {
   user: User;
 
   constructor(
-    /*TODO: private router: Router,
-    private activatedRoute: ActivatedRoute,*/
     routeParams: RouteParams,
     private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
     private userSrvc: UserService) {
       this.userId = +routeParams.id;
-    // TODO: this.userId = +this.activatedRoute.snapshot.params.id;
   }
 
   ngOnInit(): void {
