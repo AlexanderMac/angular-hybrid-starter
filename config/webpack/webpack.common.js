@@ -2,7 +2,7 @@
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const Webpack              = require('webpack');
+const webpack              = require('webpack');
 const CleanPlugin          = require('clean-webpack-plugin');
 const HtmlPlugin           = require('html-webpack-plugin');
 const ProgressBarPlugin    = require('progress-bar-webpack-plugin');
@@ -111,9 +111,8 @@ module.exports = {
       {
         test: /\.css$/,
         use: [
-          'raw-loader',
           MiniCssExtractPlugin.loader,
-          'css-loader?minify'
+          'css-loader'
         ]
       },
       {
@@ -121,7 +120,7 @@ module.exports = {
         exclude: /(node_modules)/,
         use: [
           MiniCssExtractPlugin.loader,
-          'css-loader?minify',
+          'css-loader',
           'stylus-loader'
         ]
       },
@@ -144,7 +143,7 @@ module.exports = {
     }),
 
     // To hide `Critical dependency: the request of a dependency is an expression` warning
-    new Webpack.ContextReplacementPlugin(
+    new webpack.ContextReplacementPlugin(
       /angular(\\|\/)core(\\|\/)/,
       helpers.root('src', 'app')
     ),
@@ -160,7 +159,7 @@ module.exports = {
 
     new ProgressBarPlugin({
       format: 'Build [:bar] :percent (:elapsed seconds)',
-      clear: false,
+      clear: false
     }),
 
     new NotifierPlugin({
