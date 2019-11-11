@@ -8,13 +8,10 @@
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": false,
     "noImplicitReturns": true,
-    "removeComments": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "sourceMap": true,
     "suppressImplicitAnyIndexErrors": true,
     "target": "es5"
-  },
-  "awesomeTypescriptLoaderOptions": {
-    "silent": true,
-    "transpileOnly": true
   }
 }
