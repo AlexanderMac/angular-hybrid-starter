@@ -1,14 +1,12 @@
-'use strict';
-
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const webpack              = require('webpack');
-const CleanPlugin          = require('clean-webpack-plugin');
-const HtmlPlugin           = require('html-webpack-plugin');
-const ProgressBarPlugin    = require('progress-bar-webpack-plugin');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const NotifierPlugin       = require('webpack-notifier');
-const helpers              = require('./helpers');
+const NotifierPlugin = require('webpack-notifier');
+const helpers = require('./helpers');
 
 module.exports = {
   stats: {
@@ -91,10 +89,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /(node_modules)/,
-        use: [
-          'awesome-typescript-loader',
-          'angular2-template-loader'
-        ]
+        use: ['ts-loader']
       },
       {
         test: /\.json$/,
@@ -136,11 +131,7 @@ module.exports = {
   },
 
   plugins: [
-    new CleanPlugin(['dist'], {
-      root: helpers.root(),
-      verbose: false,
-      dry: false
-    }),
+    new CleanWebpackPlugin(),
 
     // To hide `Critical dependency: the request of a dependency is an expression` warning
     new webpack.ContextReplacementPlugin(

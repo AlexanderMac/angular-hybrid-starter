@@ -1,5 +1,5 @@
-import 'core-js/es6';
-import 'core-js/es7/reflect';
+import 'core-js/es';
+import 'core-js/proposals/reflect-metadata';
 import 'zone.js/dist/zone';
 
 if (process.env.APP_ENV === 'production') {
