@@ -2,7 +2,7 @@ import { LocalStorageRepoServiceFactory } from '../ajs/_core/localstorage-repo.s
 
 export { LocalStorageRepoServiceFactory };
 
-export function LocalStorageRepoServiceFactoryFactory(i: any) {
+export function LocalStorageRepoServiceFactoryFactory(i: any): LocalStorageRepoServiceFactory {
   return i.get('LocalStorageRepoServiceFactory');
 }
 

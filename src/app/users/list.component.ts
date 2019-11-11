@@ -1,12 +1,14 @@
-import * as _                   from 'lodash';
-import { Component, OnInit }    from '@angular/core';
-import { Location,
-         LocationStrategy,
-         PathLocationStrategy } from '@angular/common';
-import { NotificationService }  from '../_core/notification.service';
-import { UserService }          from './service';
-import { RoleService }          from '../roles/service';
-import { User }                 from './model';
+import * as _ from 'lodash';
+import { Component, OnInit } from '@angular/core';
+import {
+  Location,
+  LocationStrategy,
+  PathLocationStrategy
+} from '@angular/common';
+import { NotificationService } from '../_core/notification.service';
+import { UserService } from './service';
+import { RoleService } from '../roles/service';
+import { User } from './model';
 
 class UserEx extends User {
   rolesStr: string;
@@ -58,7 +60,7 @@ export class UserListComponent implements OnInit {
         this.isLoading = false;
       })
       .catch(() => this.ntfsSrvc.error('Unable to load users'));
-      // TODO: .finally(() => this.isLoading = false);
+    // TODO: .finally(() => this.isLoading = false);
   }
 
   userDetails(user: User): void {

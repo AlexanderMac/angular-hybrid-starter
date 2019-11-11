@@ -1,4 +1,4 @@
-import * as _          from 'lodash';
+import * as _ from 'lodash';
 import { BaseService } from './base.service';
 
 export class LocalStorageRepoService extends BaseService {
@@ -11,12 +11,12 @@ export class LocalStorageRepoService extends BaseService {
     this.localStorage = $window.localStorage;
   }
 
-  init(collectionName) {
+  init(collectionName): void {
     this.collectionName = collectionName;
     this.load();
   }
 
-  load() {
+  load(): void {
     let objectsStr = this.localStorage.getItem(this.collectionName);
     if (objectsStr) {
       let objects = _.attempt(JSON.parse.bind(null, objectsStr)) as any[];
@@ -29,7 +29,7 @@ export class LocalStorageRepoService extends BaseService {
     }
   }
 
-  save() {
+  save(): void {
     let objects = _.chain(this.objects)
       .map(obj => _.omit(obj, '$$hashKey'))
       .value();
@@ -37,7 +37,7 @@ export class LocalStorageRepoService extends BaseService {
     this.localStorage.setItem(this.collectionName, objectsStr);
   }
 
-  create(obj) {
+  create(obj): any {
     return super
       .create(obj)
       .then(res => {
@@ -46,7 +46,7 @@ export class LocalStorageRepoService extends BaseService {
       });
   }
 
-  update(objData) {
+  update(objData): any {
     return super
       .update(objData)
       .then(res => {
@@ -55,7 +55,7 @@ export class LocalStorageRepoService extends BaseService {
       });
   }
 
-  delete(id) {
+  delete(id): any {
     return super
       .delete(id)
       .then(res => {
@@ -69,7 +69,7 @@ export class LocalStorageRepoServiceFactory {
   static $inject = ['$q', '$window'];
   constructor(private $q, private $window) {}
 
-  getInstance() {
+  getInstance(): LocalStorageRepoService {
     return new LocalStorageRepoService(this.$q, this.$window);
   }
 }

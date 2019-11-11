@@ -1,12 +1,14 @@
-import * as _                   from 'lodash';
-import { Component, OnInit }    from '@angular/core';
-import { Location,
-         LocationStrategy,
-         PathLocationStrategy } from '@angular/common';
-import { RouteParams }          from '../_core/route-params.service';
-import { NotificationService }  from '../_core/notification.service';
-import { UserService }          from './service';
-import { User }                 from './model';
+import * as _ from 'lodash';
+import { Component, OnInit } from '@angular/core';
+import {
+  Location,
+  LocationStrategy,
+  PathLocationStrategy
+} from '@angular/common';
+import { RouteParams } from '../_core/route-params.service';
+import { NotificationService } from '../_core/notification.service';
+import { UserService } from './service';
+import { User } from './model';
 
 @Component({
   selector: 'am-user-form',
@@ -25,8 +27,9 @@ export class UserFormComponent implements OnInit {
     routeParams: RouteParams,
     private locationSrvc: Location,
     private ntfsSrvc: NotificationService,
-    private userSrvc: UserService) {
-      this.userId = +routeParams.id;
+    private userSrvc: UserService
+  ) {
+    this.userId = +routeParams.id;
   }
 
   ngOnInit(): void {
@@ -43,17 +46,17 @@ export class UserFormComponent implements OnInit {
     this.userSrvc
       .getUser(this.userId)
       .then(user => {
-          user.roles = _.map(user.roles, r => +r);
-          this.user = user;
-        })
-        .catch(() => {
-          this.ntfsSrvc.error('Unable to load user');
-          this.locationSrvc.go('#/users');
-        })
-        .finally(() => this.isLoading = false);
+        user.roles = _.map(user.roles, r => +r);
+        this.user = user;
+      })
+      .catch(() => {
+        this.ntfsSrvc.error('Unable to load user');
+        this.locationSrvc.go('#/users');
+      })
+      .finally(() => this.isLoading = false);
   }
 
-  rolesChange(data) {
+  rolesChange(data): void {
     this.user.roles = data.roles;
   }
 

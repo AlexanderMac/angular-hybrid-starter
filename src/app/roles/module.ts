@@ -1,5 +1,5 @@
-import { NgModule }                   from '@angular/core';
-import { roleServiceProvider }        from './service';
+import { NgModule } from '@angular/core';
+import { roleServiceProvider } from './service';
 import { RoleMultiselectorDirective } from './multiselector.component';
 
 @NgModule({

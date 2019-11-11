@@ -7,23 +7,23 @@ export class RoleService {
     this.repoSrvc.init('Roles');
   }
 
-  getRole(id) {
+  getRole(id): any {
     return this.repoSrvc.getOne(id);
   }
 
-  getRoles() {
+  getRoles(): any {
     return this.repoSrvc.getList();
   }
 
-  createRole(role) {
+  createRole(role): any {
     return this.repoSrvc.create(role);
   }
 
-  updateRole(roleData) {
+  updateRole(roleData): any {
     return this.repoSrvc.update(roleData);
   }
 
-  deleteRole(id) {
+  deleteRole(id): any {
     return this.repoSrvc.delete(id);
   }
 }

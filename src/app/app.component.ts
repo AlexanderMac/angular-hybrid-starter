@@ -4,6 +4,6 @@ import { Component } from '@angular/core';
   selector: 'am-app-cmp',
   template: `
     <div ng-view></div>
-  `,
+  `
 })
 export class AppComponent { }

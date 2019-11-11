@@ -17,7 +17,7 @@ class RoleMultiselectorController {
     this.isNoRoleSelected = true;
   }
 
-  $onInit() {
+  $onInit(): void {
     this.roleSrvc
       .getRoles()
       .then(roles => {
@@ -30,7 +30,7 @@ class RoleMultiselectorController {
       });
   }
 
-  changeRole() {
+  changeRole(): void {
     let roles = _.chain(this.selectedRoles)
       .keys()
       .filter(roleId => this.selectedRoles[roleId])

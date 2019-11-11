@@ -18,28 +18,28 @@ class RoleListController {
     this.roleId = $routeParams.id;
   }
 
-  $onInit() {
+  $onInit(): void {
     this._loadRoles();
   }
 
-  _loadRoles() {
+  _loadRoles(): void {
     this.isLoading = true;
-    return this.roleSrvc
+    this.roleSrvc
       .getRoles()
       .then(roles => this.roles = roles)
       .catch(err => this.ntfsSrvc.error(err, 'Unable to load roles'))
       .finally(() => this.isLoading = false);
   }
 
-  roleDetails(role) {
+  roleDetails(role): void {
     this.ngLocationSrvc.path(`/roles/${role.id}`);
   }
 
-  editRole(role) {
+  editRole(role): void {
     this.ngLocationSrvc.path(`/roles/${role.id}/edit`);
   }
 
-  deleteRole(role) {
+  deleteRole(role): void {
     let res = confirm(`Delete ${role.name}? The role will be permanently deleted.`);
     if (!res) {
       return;

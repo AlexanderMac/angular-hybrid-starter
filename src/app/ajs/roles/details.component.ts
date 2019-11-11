@@ -15,13 +15,13 @@ class RoleDetailsController {
     this.roleId = +$routeParams.id;
   }
 
-  $onInit() {
+  $onInit(): void {
     this._loadRole();
   }
 
-  _loadRole() {
+  _loadRole(): void {
     this.isLoading = true;
-    return this.roleSrvc
+    this.roleSrvc
       .getRole(this.roleId)
       .then(role => this.role = role)
       .catch(err => {

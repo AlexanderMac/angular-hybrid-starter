@@ -18,12 +18,12 @@ ng
     'app.users'
   ])
   .config(['$routeProvider', '$locationProvider',
-    ($routeProvider: ng.route.IRouteProvider, $locationProvider: angular.ILocationProvider) => {
+    ($routeProvider: ng.route.IRouteProvider, $locationProvider: angular.ILocationProvider): void => {
       $locationProvider.hashPrefix('');
 
       $routeProvider
         .when('/not-found', {
-          template: require('./_shared/not-found.pug'),
+          template: require('./_shared/not-found.pug')
         })
         .otherwise({
           redirectTo: '/not-found'

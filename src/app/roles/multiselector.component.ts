@@ -1,5 +1,5 @@
 import { Directive, ElementRef, Injector } from '@angular/core';
-import { UpgradeComponent }                from '@angular/upgrade/static';
+import { UpgradeComponent } from '@angular/upgrade/static';
 
 export const RoleMultiselectorComponent = {};
 @Directive({

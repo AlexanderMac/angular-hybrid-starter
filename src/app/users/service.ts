@@ -1,7 +1,9 @@
-import { Injectable }                     from '@angular/core';
-import { LocalStorageRepoService,
-         LocalStorageRepoServiceFactory } from '../ajs/_core/localstorage-repo.service';
-import { User }                           from './model';
+import { Injectable } from '@angular/core';
+import {
+  LocalStorageRepoService,
+  LocalStorageRepoServiceFactory
+} from '../ajs/_core/localstorage-repo.service';
+import { User } from './model';
 
 @Injectable()
 export class UserService {

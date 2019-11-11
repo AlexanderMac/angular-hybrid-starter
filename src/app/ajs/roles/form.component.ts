@@ -16,7 +16,7 @@ class RoleFormController {
     this.roleId = +$routeParams.id;
   }
 
-  $onInit() {
+  $onInit(): void {
     if (!this.roleId) {
       this.role = {};
       return;
@@ -24,9 +24,9 @@ class RoleFormController {
     this._loadRole();
   }
 
-  _loadRole() {
+  _loadRole(): void {
     this.isLoading = true;
-    return this.roleSrvc
+    this.roleSrvc
       .getRole(this.roleId)
       .then(role => this.role = role)
       .catch(err => {
@@ -36,7 +36,7 @@ class RoleFormController {
       .finally(() => this.isLoading = false);
   }
 
-  saveRole() {
+  saveRole(): void {
     this.isSaving = true;
     let fn = this.roleId ? 'updateRole' : 'createRole';
     this.roleSrvc[fn](this.role)

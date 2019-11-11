@@ -2,7 +2,7 @@ export abstract class RouteParams {
   [key: string]: string;
 }
 
-export function routeParamsFactory(i: any) {
+export function routeParamsFactory(i: any): RouteParams {
   return i.get('$routeParams');
 }
 

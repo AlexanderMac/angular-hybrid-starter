@@ -16,7 +16,7 @@ export class BaseService {
     this.nextId = 0;
   }
 
-  getOne(id: any) {
+  getOne(id: any): Promise<any> {
     let obj = _.chain(this.objects)
       .find({ id: parseInt(id) })
       .cloneDeep()
@@ -24,24 +24,24 @@ export class BaseService {
     return this.ngQPromise.resolve(obj);
   }
 
-  getList() {
+  getList(): Promise<any> {
     let objects = _.cloneDeep(this.objects);
     return this.ngQPromise.resolve(objects);
   }
 
-  create(obj: any) {
+  create(obj: any): Promise<any> {
     obj.id = ++this.nextId;
     this.objects.push(_.cloneDeep(obj));
     return this.ngQPromise.resolve(obj);
   }
 
-  update(objData: any) {
+  update(objData: any): Promise<any> {
     let obj = _.find(this.objects, { id: parseInt(objData.id) });
     _.extend(obj, objData);
     return this.ngQPromise.resolve(_.cloneDeep(obj));
   }
 
-  delete(id: any) {
+  delete(id: any): Promise<any> {
     _.remove(this.objects, obj => obj.id === parseInt(id));
     return this.ngQPromise.resolve();
   }
