@@ -53,9 +53,9 @@ export class UserListComponent implements OnInit {
             .join(',')
             .value();
           // TODO:
-          this.isLoading = false;
           return userEx;
         });
+        this.isLoading = false;
       })
       .catch(() => this.ntfsSrvc.error('Unable to load users'));
       // TODO: .finally(() => this.isLoading = false);

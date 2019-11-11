@@ -10,7 +10,7 @@ import { User }                 from './model';
 
 @Component({
   selector: 'am-user-form',
-  templateUrl: './form.component.pug',
+  template: require('./form.component.pug'),
   providers: [
     Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
   ]

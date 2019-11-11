@@ -15,7 +15,7 @@ class UserEx extends User {
 
 @Component({
   selector: 'am-user-details',
-  templateUrl: './details.component.pug',
+  template: require('./details.component.pug'),
   providers: [
     Location, { provide: LocationStrategy, useClass: PathLocationStrategy }
   ]
@@ -57,7 +57,7 @@ export class UserDetailsComponent implements OnInit {
         // TODO:
         this.isLoading = false;
       })
-      .catch(err => {
+      .catch(() => {
         this.ntfsSrvc.error('Unable to load user');
         this.locationSrvc.go('#/users');
       });
