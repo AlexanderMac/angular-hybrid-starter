@@ -81,7 +81,7 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /[\/\\]@angular[\/\\]core[\/\\].+\.js$/,
+        test: /[\\/\\]@angular[\\/\\]core[\\/\\].+\.js$/,
         parser: {
           system: true
         }
@@ -89,7 +89,7 @@ module.exports = {
       {
         test: /\.ts$/,
         exclude: /(node_modules)/,
-        use: ['ts-loader']
+        use: 'ts-loader'
       },
       {
         test: /\.json$/,
@@ -99,7 +99,12 @@ module.exports = {
         test: /\.pug$/,
         exclude: /(node_modules)/,
         use: [
-          'raw-loader',
+          {
+            loader: 'raw-loader',
+            options: {
+              esModule: false
+            }
+          },
           'pug-html-loader'
         ]
       },
