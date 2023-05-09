@@ -1,4 +1,7 @@
 # angular-hybrid-starter
+
+## WARNING :warning:: This repo is not maintained anymore, use [angular-starter](https://github.com/AlexanderMac/angular-starter) instead.
+
 `Angular hybrid` application template.
 - Check [angularjs-starter](https://github.com/AlexanderMac/angularjs-starter) if you need a starter for AngularJs.
 - Check [angular-starter](https://github.com/AlexanderMac/angular-starter) if you need a starter for Angular (v2+).
